@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+
+$:.push Dir.pwd + "/lib"
+require "xlsx"
+package = Xlsx::Package.new
+worksheet = package.workbook.worksheets[0]
+
+worksheet.add_rows(
+  { number: 2,
+    cells: [
+      { column: 2, value: "Column 1" },
+      { column: 3, value: "Column 2" },
+      { column: 4, value: "Column 3" },
+      { column: 5, value: "Column 4" }] },
+  { number: 3,
+    cells: [
+      { column: 2, value: 1 },
+      { column: 3, value: 41810 },
+      { column: 4, value: 65 },
+      { column: 5, value: "hi" }] },
+  { number: 4,
+    cells: [
+      { column: 2, value: 2 },
+      { column: 3, value: 41841 },
+      { column: 4, value: 14 },
+      { column: 5, value: "hi" }] },
+  { number: 5,
+    cells: [
+      { column: 2, value: 3 },
+      { column: 3, value: 41875 },
+      { column: 4, value: 13 },
+      { column: 5, value: "hi" }] },
+  { number: 6,
+    cells: [
+      { column: 2, value: 4 },
+      { column: 3, value: 41875 },
+      { column: 4, value: 9 },
+      { column: 5, value: "hi" }] })
+
+filename = "gemtest1.xlsx"
+system "rm ~/Desktop/#{filename}"
+package.save File.expand_path("~/Desktop/#{filename}")
+exec "open ~/Desktop/#{filename}"
