@@ -38,25 +38,25 @@ worksheet.add_rows(
   { number: 3,
     cells: [
       { column: 2, value: 1, style: {alignment: left} },
-      { column: 3, value: 41810, style: {format: NumberFormat::DAY_MONTH, alignment: center} },
+      { column: 3, value: Date.new(2014, 6, 20), style: {format: NumberFormat::DAY_MONTH, alignment: center} },
       { column: 4, value: 65, style: {format: currency, alignment: right} },
       { column: 5, value: "hi", style: {format: currency, fill: fill3, alignment: right} }] },
   { number: 4,
     cells: [
       { column: 2, value: 2, style: {alignment: left} },
-      { column: 3, value: 41841, style: {format: NumberFormat::DAY_MONTH, alignment: center} },
+      { column: 3, value: Date.new(2014, 7, 21), style: {format: NumberFormat::DAY_MONTH, alignment: center} },
       { column: 4, value: 14, style: {format: currency, alignment: right} },
       { column: 5, value: "hi", style: {format: currency, fill: fill3, alignment: right} }] },
   { number: 5,
     cells: [
       { column: 2, value: 3, style: {alignment: left} },
-      { column: 3, value: 41875, style: {format: NumberFormat::DAY_MONTH, alignment: center} },
+      { column: 3, value: Date.new(2014, 8, 24), style: {format: NumberFormat::DAY_MONTH, alignment: center} },
       { column: 4, value: 13, style: {format: currency, alignment: right} },
       { column: 5, value: "hi", style: {format: currency, fill: fill3, alignment: right} }] },
   { number: 6,
     cells: [
       { column: 2, value: 4, style: {alignment: left} },
-      { column: 3, value: 41875, style: {format: NumberFormat::DAY_MONTH, alignment: center} },
+      { column: 3, value: Date.new(2014, 8, 24), style: {format: NumberFormat::DAY_MONTH, alignment: center} },
       { column: 4, value: 9, style: {format: currency, alignment: right} },
       { column: 5, value: "hi", style: {format: currency, fill: fill3, alignment: right} }] })
 

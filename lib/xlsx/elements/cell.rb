@@ -1,3 +1,5 @@
+require "date"
+
 module Xlsx
   module Elements
     class Cell
@@ -7,10 +9,15 @@ module Xlsx
         @row = row
         @column = options.fetch(:column)
         @value = options[:value]
-        @type = :general
-        if value.is_a? String
+        case value
+        when String
           @type = :string
-          @string_reference = package.string_ref(value)
+          @string_id = package.string_ref(value)
+        when Date then
+          @type = :date
+          @serial_date = to_serial_date(value)
+        else
+          @type = :general
         end
         @style = package.style_ref(options[:style]) if options.key? :style
         @formula = options[:formula]
@@ -44,11 +51,12 @@ module Xlsx
       
       def to_xml(xml)
         attributes = {"r" => id}
-        attributes.merge!("t" => TYPE_MAP[type]) unless type == :general
+        attributes.merge!("t" => "s") if type == :string
         attributes.merge!("s" => style) if style
         
         value = self.value
-        value = string_reference if type == :string
+        value = string_id if type == :string
+        value = serial_date if type == :date
         
         xml.c(attributes) do
           xml.v value if value
@@ -57,11 +65,17 @@ module Xlsx
       end
       
     private
-      attr_reader :string_reference
+      attr_reader :string_id, :serial_date
       
-      TYPE_MAP = {
-        general: nil,
-        string: "s" }.freeze
+      EXCEL_ANCHOR_DATE = Date.new(1900, 1, 1).freeze
+      
+      def to_serial_date(date)
+        # Excel stores dates as the number of days since 1900-Jan-0
+        # Excel behaves as if 1900 was a leap year, so the number is
+        # generally 1 greater than you would expect.
+        # http://www.cpearson.com/excel/datetime.htm
+        (date - EXCEL_ANCHOR_DATE).to_i + 2
+      end
       
     end
   end
