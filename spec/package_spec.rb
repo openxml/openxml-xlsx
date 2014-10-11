@@ -27,6 +27,10 @@ describe Xlsx::Package do
     it "should create the shared_strings part" do
       expect(package.shared_strings).to be_instance_of(Xlsx::Parts::SharedStrings)
     end
+    
+    it "should create the stylesheet part" do
+      expect(package.stylesheet).to be_instance_of(Xlsx::Parts::Stylesheet)
+    end
   end
 
   context "when saving a package" do

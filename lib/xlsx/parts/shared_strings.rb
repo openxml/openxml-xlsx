@@ -8,9 +8,7 @@ module Xlsx
       end
 
       def reference_of(string)
-        strings.index(string) || begin
-          strings.push(string).length - 1
-        end
+        Xlsx.index!(strings, string)
       end
 
       def to_xml

@@ -1,7 +1,7 @@
 module Xlsx
   module Elements
     class Cell
-      attr_reader :row, :column, :value, :type, :formula
+      attr_reader :row, :column, :value, :type, :style, :formula
       
       def initialize(row, options={})
         @row = row
@@ -10,8 +10,9 @@ module Xlsx
         @type = :general
         if value.is_a? String
           @type = :string
-          @string_reference = package.string_reference(value)
+          @string_reference = package.string_ref(value)
         end
+        @style = package.style_ref(options[:style]) if options.key? :style
         @formula = options[:formula]
       end
       
@@ -44,6 +45,7 @@ module Xlsx
       def to_xml(xml)
         attributes = {"r" => id}
         attributes.merge!("t" => TYPE_MAP[type]) unless type == :general
+        attributes.merge!("s" => style) if style
         
         value = self.value
         value = string_reference if type == :string

@@ -6,26 +6,34 @@ module Xlsx
                 :global_rels,
                 :rels,
                 :shared_strings,
+                :stylesheet,
                 :workbook
 
     def initialize
       @content_types = Xlsx::Parts::ContentTypes.new(nil, {
         "/xl/workbook.xml" => TYPE_WORKBOOK,
         "/xl/worksheets/sheet1.xml" => TYPE_WORKSHEET,
-        "/xl/sharedStrings.xml" => TYPE_SHARED_STRINGS
+        "/xl/sharedStrings.xml" => TYPE_SHARED_STRINGS,
+        "/xl/styles.xml" => TYPE_STYLES
       })
       @global_rels = Xlsx::Parts::Rels.new([
         { "Type" => REL_DOCUMENT, "Target" => "xl/workbook.xml" },
       ])
       @rels = Xlsx::Parts::Rels.new([
         { "Type" => REL_SHARED_STRINGS, "Target" => "sharedStrings.xml" },
+        { "Type" => REL_STYLES, "Target" => "styles.xml" }
       ])
       @shared_strings = Xlsx::Parts::SharedStrings.new
+      @stylesheet = Xlsx::Parts::Stylesheet.new
       @workbook = Xlsx::Parts::Workbook.new(self)
     end
-    
-    def string_reference(string)
+
+    def string_ref(string)
       shared_strings.reference_of(string)
+    end
+
+    def style_ref(style)
+      stylesheet.reference_of(style)
     end
 
     def save(path)
@@ -37,7 +45,7 @@ module Xlsx
       package.add_part "xl/_rels/workbook.xml.rels", rels.read
       # xl/calcChain.xml
       package.add_part "xl/sharedStrings.xml", shared_strings.read
-      # xl/styles.xml
+      package.add_part "xl/styles.xml", stylesheet.read
       # xl/theme/theme1.xml
       package.add_part "xl/workbook.xml", workbook.read
       workbook.worksheets.each do |worksheet|

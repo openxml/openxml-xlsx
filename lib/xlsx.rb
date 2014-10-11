@@ -19,4 +19,8 @@ module Xlsx
   TYPE_CORE_PROPS = "application/vnd.openxmlformats-package.core-properties+xml".freeze
   TYPE_APP_PROPS = "application/vnd.openxmlformats-officedocument.extended-properties+xml".freeze
   
+  def self.index!(collection, item)
+    collection.index(item) || collection.push(item).length - 1
+  end
+  
 end

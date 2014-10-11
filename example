@@ -5,37 +5,60 @@ require "xlsx"
 package = Xlsx::Package.new
 worksheet = package.workbook.worksheets[0]
 
+include Xlsx::Elements
+
+currency = NumberFormat.new("\"$\"#,##0.00")
+
+heading = Font.new("Calibri", 14)
+
+fill2 = PatternFill.new("solid",
+  ThemeColor.new(0, -4.9989318521683403E-2),
+  IndexedColor.new(65))
+fill3 = PatternFill.new("solid",
+  ThemeColor.new(8, 0.79998168889431442),
+  IndexedColor.new(65))
+fill4 = PatternFill.new("solid",
+  ThemeColor.new(8, 0.59999389629810485),
+  IndexedColor.new(65))
+
+left = Alignment.new("left", "center")
+center = Alignment.new("center", "center")
+right = Alignment.new("right", "center")
+
 worksheet.add_rows(
+  { number: 1,
+    cells: [
+      { column: 2, value: "Test", style: {font: heading, alignment: left} }] },
   { number: 2,
     cells: [
-      { column: 2, value: "Column 1" },
-      { column: 3, value: "Column 2" },
-      { column: 4, value: "Column 3" },
-      { column: 5, value: "Column 4" }] },
+      { column: 2, value: "Column 1", style: {fill: fill2, alignment: left} },
+      { column: 3, value: "Column 2", style: {fill: fill2, alignment: center} },
+      { column: 4, value: "Column 3", style: {fill: fill2, alignment: right} },
+      { column: 5, value: "Column 4", style: {fill: fill4, alignment: right} }] },
   { number: 3,
     cells: [
-      { column: 2, value: 1 },
-      { column: 3, value: 41810 },
-      { column: 4, value: 65 },
-      { column: 5, value: "hi" }] },
+      { column: 2, value: 1, style: {alignment: left} },
+      { column: 3, value: 41810, style: {format: NumberFormat::DAY_MONTH, alignment: center} },
+      { column: 4, value: 65, style: {format: currency, alignment: right} },
+      { column: 5, value: "hi", style: {format: currency, fill: fill3, alignment: right} }] },
   { number: 4,
     cells: [
-      { column: 2, value: 2 },
-      { column: 3, value: 41841 },
-      { column: 4, value: 14 },
-      { column: 5, value: "hi" }] },
+      { column: 2, value: 2, style: {alignment: left} },
+      { column: 3, value: 41841, style: {format: NumberFormat::DAY_MONTH, alignment: center} },
+      { column: 4, value: 14, style: {format: currency, alignment: right} },
+      { column: 5, value: "hi", style: {format: currency, fill: fill3, alignment: right} }] },
   { number: 5,
     cells: [
-      { column: 2, value: 3 },
-      { column: 3, value: 41875 },
-      { column: 4, value: 13 },
-      { column: 5, value: "hi" }] },
+      { column: 2, value: 3, style: {alignment: left} },
+      { column: 3, value: 41875, style: {format: NumberFormat::DAY_MONTH, alignment: center} },
+      { column: 4, value: 13, style: {format: currency, alignment: right} },
+      { column: 5, value: "hi", style: {format: currency, fill: fill3, alignment: right} }] },
   { number: 6,
     cells: [
-      { column: 2, value: 4 },
-      { column: 3, value: 41875 },
-      { column: 4, value: 9 },
-      { column: 5, value: "hi" }] })
+      { column: 2, value: 4, style: {alignment: left} },
+      { column: 3, value: 41875, style: {format: NumberFormat::DAY_MONTH, alignment: center} },
+      { column: 4, value: 9, style: {format: currency, alignment: right} },
+      { column: 5, value: "hi", style: {format: currency, fill: fill3, alignment: right} }] })
 
 filename = "gemtest1.xlsx"
 system "rm ~/Desktop/#{filename}"
