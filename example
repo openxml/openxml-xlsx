@@ -25,6 +25,12 @@ left = Alignment.new("left", "center")
 center = Alignment.new("center", "center")
 right = Alignment.new("right", "center")
 
+worksheet.column_widths(
+  1 => 3.83203125,
+  2 => 11.1640625,
+  5 => 36.1640625
+)
+
 worksheet.add_rows(
   { number: 1,
     cells: [
