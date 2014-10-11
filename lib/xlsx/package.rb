@@ -36,22 +36,32 @@ module Xlsx
       stylesheet.reference_of(style)
     end
 
+    def to_stream
+      package.to_stream
+    end
+
     def save(path)
-      package = OpenXmlPackage.new
-      package.add_part "[Content_Types].xml", content_types.read
-      package.add_part "_rels/.rels", global_rels.read
-      # docProps/app.xml
-      # docProps/core.xml
-      package.add_part "xl/_rels/workbook.xml.rels", rels.read
-      # xl/calcChain.xml
-      package.add_part "xl/sharedStrings.xml", shared_strings.read
-      package.add_part "xl/styles.xml", stylesheet.read
-      # xl/theme/theme1.xml
-      package.add_part "xl/workbook.xml", workbook.read
-      workbook.worksheets.each do |worksheet|
-        package.add_part "xl/worksheets/sheet#{worksheet.index}.xml", worksheet.read
-      end
       package.write_to path
+    end
+
+  private
+
+    def package
+      OpenXmlPackage.new.tap do |package|
+        package.add_part "[Content_Types].xml", content_types.read
+        package.add_part "_rels/.rels", global_rels.read
+        # docProps/app.xml
+        # docProps/core.xml
+        package.add_part "xl/_rels/workbook.xml.rels", rels.read
+        # xl/calcChain.xml
+        package.add_part "xl/sharedStrings.xml", shared_strings.read
+        package.add_part "xl/styles.xml", stylesheet.read
+        # xl/theme/theme1.xml
+        package.add_part "xl/workbook.xml", workbook.read
+        workbook.worksheets.each do |worksheet|
+          package.add_part "xl/worksheets/sheet#{worksheet.index}.xml", worksheet.read
+        end
+      end
     end
 
   end
