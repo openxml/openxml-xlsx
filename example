@@ -38,7 +38,7 @@ worksheet.add_rows(
   { number: 3,
     cells: [
       { column: 2, value: 1, style: {alignment: left} },
-      { column: 3, value: Date.new(2014, 6, 20), style: {format: NumberFormat::DAY_MONTH, alignment: center} },
+      { column: 3, value: Time.new(2014, 6, 20, 8, 30), style: {format: NumberFormat::DATETIME, alignment: center} },
       { column: 4, value: 65, style: {format: currency, alignment: right} },
       { column: 5, value: "hi", style: {format: currency, fill: fill3, alignment: right} }] },
   { number: 4,

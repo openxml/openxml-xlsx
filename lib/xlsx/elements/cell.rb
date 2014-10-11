@@ -16,6 +16,9 @@ module Xlsx
         when Date then
           @type = :date
           @serial_date = to_serial_date(value)
+        when Time then
+          @type = :time
+          @serial_time = to_serial_time(value)
         else
           @type = :general
         end
@@ -57,6 +60,7 @@ module Xlsx
         value = self.value
         value = string_id if type == :string
         value = serial_date if type == :date
+        value = serial_time if type == :time
         
         xml.c(attributes) do
           xml.v value if value
@@ -65,9 +69,10 @@ module Xlsx
       end
       
     private
-      attr_reader :string_id, :serial_date
+      attr_reader :string_id, :serial_date, :serial_time
       
       EXCEL_ANCHOR_DATE = Date.new(1900, 1, 1).freeze
+      SECONDS_PER_DAY = 86400.freeze
       
       def to_serial_date(date)
         # Excel stores dates as the number of days since 1900-Jan-0
@@ -75,6 +80,13 @@ module Xlsx
         # generally 1 greater than you would expect.
         # http://www.cpearson.com/excel/datetime.htm
         (date - EXCEL_ANCHOR_DATE).to_i + 2
+      end
+      
+      def to_serial_time(time)
+        date = to_serial_date(time.to_date)
+        
+        seconds_since_midnight = time.hour * 3600 + time.min * 60 + time.sec
+        date + (seconds_since_midnight.to_f / SECONDS_PER_DAY)
       end
       
     end
