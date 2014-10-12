@@ -54,8 +54,8 @@ module Xlsx
       
       def to_xml(xml)
         attributes = {"r" => id}
-        attributes.merge!("t" => "s") if type == :string
         attributes.merge!("s" => style) if style
+        attributes.merge!("t" => "s") if type == :string
         
         value = self.value
         value = string_id if type == :string

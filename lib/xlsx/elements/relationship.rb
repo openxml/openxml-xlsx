@@ -10,7 +10,7 @@ module Xlsx
       end
       
       def to_xml(xml)
-        xml.Relationship("Id" => id, "Target" => target, "Type" => type)
+        xml.Relationship("Id" => id, "Type" => type, "Target" => target)
       end
       
     end
