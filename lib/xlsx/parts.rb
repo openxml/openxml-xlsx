@@ -3,6 +3,6 @@ module Xlsx
   end
 end
 
-Dir.glob("#{File.join(File.dirname(__FILE__), "parts", "*.rb")}").each do |file|
+Dir.glob("#{File.join(File.dirname(__FILE__), "parts", "*.rb")}").sort.each do |file|
   require file
 end
