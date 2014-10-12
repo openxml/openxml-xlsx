@@ -1,12 +1,14 @@
 module Xlsx
   module Parts
     class Worksheet < BasePart
-      attr_reader :workbook, :index, :rows
+      attr_reader :workbook, :index, :rows, :tables, :rels
 
       def initialize(workbook, index)
         @workbook = workbook
         @index = index
         @rows = []
+        @tables = []
+        @rels = Xlsx::Parts::Rels.new
         @column_widths = {}
       end
 
@@ -23,6 +25,12 @@ module Xlsx
 
       def add_row(attributes)
         rows.push Xlsx::Elements::Row.new(self, attributes)
+      end
+
+      def add_table(id, name, ref, columns)
+        table = Xlsx::Parts::Table.new(id, name, ref, columns)
+        rels.add_relationship(REL_TABLE, "../tables/#{table.filename}")
+        workbook.add_table table
       end
 
       def to_xml
@@ -42,6 +50,11 @@ module Xlsx
             end
             xml.pageMargins(left: 0.75, right: 0.75, top: 1, bottom: 1, header: 0.5, footer: 0.5)
             xml.pageSetup(orientation: "portrait", horizontalDpi: 4294967292, verticalDpi: 4294967292)
+            xml.tableParts(count: tables.count) do
+              tables.each do |rel|
+                xml.tablePart("r:id" => rel.id)
+              end
+            end if tables.any?
           end
         end
       end
@@ -56,6 +69,10 @@ module Xlsx
         { "xmlns" => "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
           "xmlns:r" => "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
           "xmlns:mc" => "http://schemas.openxmlformats.org/markup-compatibility/2006" }
+      end
+
+      def tables
+        rels.relationships.select { |rel| rel.type == REL_TABLE }
       end
 
     end

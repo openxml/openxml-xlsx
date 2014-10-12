@@ -11,7 +11,13 @@ module Xlsx
       end
 
       def add_relationship(type, target, id=nil)
-        relationships.push Xlsx::Elements::Relationship.new(type, target, id)
+        Xlsx::Elements::Relationship.new(type, target, id).tap do |relationship|
+          relationships.push relationship
+        end
+      end
+
+      def any?
+        relationships.any?
       end
 
       def to_xml

@@ -66,6 +66,13 @@ worksheet.add_rows(
       { column: 4, value: 9, style: {format: currency, alignment: right} },
       { column: 5, value: "hi", style: {format: currency, fill: fill3, alignment: right} }] })
 
+worksheet.add_table 1, "Table1", "B2:E6", [
+  TableColumn.new("Column 1"),
+  TableColumn.new("Column 2"),
+  TableColumn.new("Column 3"),
+  TableColumn.new("Column 4")
+]
+
 filename = "gemtest1.xlsx"
 system "rm ~/Desktop/#{filename}"
 package.save File.expand_path("~/Desktop/#{filename}")

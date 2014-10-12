@@ -1,11 +1,12 @@
 module Xlsx
   module Parts
     class Workbook < BasePart
-      attr_reader :package, :worksheets
+      attr_reader :package, :worksheets, :tables
 
       def initialize(package)
         @package = package
         @worksheets = []
+        @tables = []
         add_worksheet
       end
 
@@ -16,6 +17,11 @@ module Xlsx
           "worksheets/sheet#{worksheet.index}.xml",
           "rId#{worksheet.index}")
         worksheets.push worksheet
+      end
+
+      def add_table(table)
+        package.content_types.set_override "/xl/tables/#{table.filename}", TYPE_TABLE
+        tables.push table
       end
 
       def to_xml

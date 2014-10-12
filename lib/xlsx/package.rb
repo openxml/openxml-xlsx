@@ -56,9 +56,13 @@ module Xlsx
         # xl/calcChain.xml
         package.add_part "xl/sharedStrings.xml", shared_strings.read
         package.add_part "xl/styles.xml", stylesheet.read
+        workbook.tables.each do |table|
+          package.add_part "xl/tables/#{table.filename}", table.read
+        end
         # xl/theme/theme1.xml
         package.add_part "xl/workbook.xml", workbook.read
         workbook.worksheets.each do |worksheet|
+          package.add_part "xl/worksheets/_rels/sheet#{worksheet.index}.xml.rels", worksheet.rels.read if worksheet.rels.any?
           package.add_part "xl/worksheets/sheet#{worksheet.index}.xml", worksheet.read
         end
       end
