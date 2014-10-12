@@ -1,3 +1,5 @@
+require "xlsx/elements/implied_number_format"
+
 module Xlsx
   module Elements
     class NumberFormat < Struct.new(:format)
