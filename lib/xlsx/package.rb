@@ -4,7 +4,7 @@ module Xlsx
   class Package
     attr_reader :content_types,
                 :global_rels,
-                :rels,
+                :xl_rels,
                 :shared_strings,
                 :stylesheet,
                 :workbook
@@ -19,7 +19,7 @@ module Xlsx
       @global_rels = Xlsx::Parts::Rels.new([
         { "Type" => REL_DOCUMENT, "Target" => "xl/workbook.xml" },
       ])
-      @rels = Xlsx::Parts::Rels.new([
+      @xl_rels = Xlsx::Parts::Rels.new([
         { "Type" => REL_SHARED_STRINGS, "Target" => "sharedStrings.xml" },
         { "Type" => REL_STYLES, "Target" => "styles.xml" }
       ])
@@ -52,7 +52,7 @@ module Xlsx
         package.add_part "_rels/.rels", global_rels.read
         # docProps/app.xml
         # docProps/core.xml
-        package.add_part "xl/_rels/workbook.xml.rels", rels.read
+        package.add_part "xl/_rels/workbook.xml.rels", xl_rels.read
         # xl/calcChain.xml
         package.add_part "xl/sharedStrings.xml", shared_strings.read
         package.add_part "xl/styles.xml", stylesheet.read

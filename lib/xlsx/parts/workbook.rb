@@ -12,7 +12,7 @@ module Xlsx
 
       def add_worksheet
         worksheet = Worksheet.new(self, worksheets.length + 1)
-        package.rels.add_relationship(
+        package.xl_rels.add_relationship(
           REL_WORKSHEET,
           "worksheets/sheet#{worksheet.index}.xml",
           "rId#{worksheet.index}")

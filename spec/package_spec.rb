@@ -21,7 +21,7 @@ describe Xlsx::Package do
     end
     
     it "should create the _rels part" do
-      expect(package.rels).to be_instance_of(Xlsx::Parts::Rels)
+      expect(package.xl_rels).to be_instance_of(Xlsx::Parts::Rels)
     end
     
     it "should create the shared_strings part" do
