@@ -9,7 +9,7 @@ describe Xlsx::Package do
     end
 
     it "should create the content types part" do
-      expect(package.content_types).to be_instance_of(Xlsx::Parts::ContentTypes)
+      expect(package.content_types).to be_instance_of(OpenXml::Parts::ContentTypes)
     end
 
     it "should create the workbook part" do
@@ -17,11 +17,11 @@ describe Xlsx::Package do
     end
     
     it "should create the global rels part" do
-      expect(package.rels).to be_instance_of(Xlsx::Parts::Rels)
+      expect(package.rels).to be_instance_of(OpenXml::Parts::Rels)
     end
     
     it "should create the _rels part" do
-      expect(package.xl_rels).to be_instance_of(Xlsx::Parts::Rels)
+      expect(package.xl_rels).to be_instance_of(OpenXml::Parts::Rels)
     end
     
     it "should create the shared_strings part" do
@@ -30,18 +30,6 @@ describe Xlsx::Package do
     
     it "should create the stylesheet part" do
       expect(package.stylesheet).to be_instance_of(Xlsx::Parts::Stylesheet)
-    end
-  end
-
-  context "when saving a package" do
-    before(:each) do
-      @package = described_class.new
-    end
-
-    it "should write to a OpenXmlPackage" do
-      path = "some_file.docx"
-      mock.instance_of(OpenXmlPackage).write_to(path)
-      package.save(path)
     end
   end
 

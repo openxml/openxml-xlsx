@@ -1,6 +1,6 @@
 module Xlsx
   module Parts
-    class Worksheet < BasePart
+    class Worksheet < OpenXml::Part
       attr_reader :workbook, :index, :rows, :tables, :rels
 
       def initialize(workbook, index)
@@ -8,7 +8,7 @@ module Xlsx
         @index = index
         @rows = []
         @tables = []
-        @rels = Xlsx::Parts::Rels.new
+        @rels = OpenXml::Parts::Rels.new
         @column_widths = {}
       end
 
@@ -72,7 +72,7 @@ module Xlsx
       end
 
       def tables
-        rels.relationships.select { |rel| rel.type == REL_TABLE }
+        rels.select { |rel| rel.type == REL_TABLE }
       end
 
     end

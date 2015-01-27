@@ -1,6 +1,6 @@
 module Xlsx
   module Parts
-    class Table < BasePart
+    class Table < OpenXml::Part
       attr_reader :id, :name, :ref, :columns
 
       def initialize(id, name, ref, columns)

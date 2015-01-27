@@ -1,6 +1,6 @@
 module Xlsx
   module Parts
-    class Workbook < BasePart
+    class Workbook < OpenXml::Part
       attr_reader :package, :worksheets, :tables
 
       def initialize(package)
@@ -16,11 +16,14 @@ module Xlsx
           REL_WORKSHEET,
           "worksheets/sheet#{worksheet.index}.xml",
           "rId#{worksheet.index}")
+        package.add_part "xl/worksheets/_rels/sheet#{worksheet.index}.xml.rels", worksheet.rels
+        package.add_part "xl/worksheets/sheet#{worksheet.index}.xml", worksheet
         worksheets.push worksheet
       end
 
       def add_table(table)
-        package.content_types.set_override "/xl/tables/#{table.filename}", TYPE_TABLE
+        package.content_types.add_override "/xl/tables/#{table.filename}", TYPE_TABLE
+        package.add_part "xl/tables/#{table.filename}", table
         tables.push table
       end
 

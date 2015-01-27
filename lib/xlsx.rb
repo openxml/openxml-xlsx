@@ -1,7 +1,3 @@
-require "xlsx/elements"
-require "xlsx/package"
-require "xlsx/parts"
-
 module Xlsx
   REL_DOCUMENT = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument".freeze
   REL_WORKSHEET = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet".freeze
@@ -26,3 +22,7 @@ module Xlsx
   end
   
 end
+
+require "xlsx/elements"
+require "xlsx/package"
+require "xlsx/parts"

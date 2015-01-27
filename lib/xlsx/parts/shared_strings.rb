@@ -1,6 +1,6 @@
 module Xlsx
   module Parts
-    class SharedStrings < BasePart
+    class SharedStrings < OpenXml::Part
       attr_reader :strings
 
       def initialize

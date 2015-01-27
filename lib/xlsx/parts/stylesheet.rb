@@ -1,6 +1,6 @@
 module Xlsx
   module Parts
-    class Stylesheet < BasePart
+    class Stylesheet < OpenXml::Part
       include Xlsx::Elements
 
       attr_reader :formats, :fonts, :fills, :borders, :styles
