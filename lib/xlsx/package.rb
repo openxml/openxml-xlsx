@@ -3,7 +3,7 @@ require "open_xml_package"
 module Xlsx
   class Package
     attr_reader :content_types,
-                :global_rels,
+                :rels,
                 :xl_rels,
                 :shared_strings,
                 :stylesheet,
@@ -16,7 +16,7 @@ module Xlsx
         "/xl/sharedStrings.xml" => TYPE_SHARED_STRINGS,
         "/xl/styles.xml" => TYPE_STYLES
       })
-      @global_rels = Xlsx::Parts::Rels.new([
+      @rels = Xlsx::Parts::Rels.new([
         { "Type" => REL_DOCUMENT, "Target" => "xl/workbook.xml" },
       ])
       @xl_rels = Xlsx::Parts::Rels.new([
@@ -49,7 +49,7 @@ module Xlsx
     def package
       OpenXmlPackage.new.tap do |package|
         package.add_part "[Content_Types].xml", content_types.read
-        package.add_part "_rels/.rels", global_rels.read
+        package.add_part "_rels/.rels", rels.read
         # docProps/app.xml
         # docProps/core.xml
         package.add_part "xl/_rels/workbook.xml.rels", xl_rels.read

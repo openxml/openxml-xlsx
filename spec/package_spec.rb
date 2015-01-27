@@ -17,7 +17,7 @@ describe Xlsx::Package do
     end
     
     it "should create the global rels part" do
-      expect(package.global_rels).to be_instance_of(Xlsx::Parts::Rels)
+      expect(package.rels).to be_instance_of(Xlsx::Parts::Rels)
     end
     
     it "should create the _rels part" do
