@@ -9,7 +9,7 @@ include Xlsx::Elements
 
 currency = NumberFormat.new("\"$\"#,##0.00")
 
-heading = Font.new("Calibri", 14)
+heading = Font.new("Calibri", 14, {bold: true, italic: true, underline: true})
 
 fill2 = PatternFill.new("solid",
   ThemeColor.new(0, -4.9989318521683403E-2),
