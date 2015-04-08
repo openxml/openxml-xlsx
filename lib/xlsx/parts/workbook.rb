@@ -1,12 +1,13 @@
 module Xlsx
   module Parts
     class Workbook < OpenXml::Part
-      attr_reader :package, :worksheets, :tables
+      attr_reader :package, :worksheets, :tables, :defined_names
 
       def initialize(package)
         @package = package
         @worksheets = []
         @tables = []
+        @defined_names =[]
         add_worksheet
       end
 
@@ -26,6 +27,16 @@ module Xlsx
         package.add_part "xl/tables/#{table.filename}", table
         tables.push table
       end
+      
+      def add_defined_names(*defined_names)
+        defined_names.flatten.each do |attributes|
+          add_defined_name attributes
+        end
+      end
+      
+      def add_defined_name(attributes)
+        defined_names.push Xlsx::Elements::DefinedName.new(attributes[:name], attributes[:formula])
+      end
 
       def to_xml
         build_standalone_xml do |xml|
@@ -36,6 +47,9 @@ module Xlsx
                 "sheetId" => worksheet.index,
                 "r:id" => "rId#{worksheet.index}")
             } }
+            xml.definedNames do
+              defined_names.each { |defined_name| defined_name.to_xml(xml) }
+            end if defined_names.any?
           }
         end
       end
