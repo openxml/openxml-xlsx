@@ -10,6 +10,8 @@ include Xlsx::Elements
 
 workbook.add_defined_names({name: "Alpha", formula:"Sheet1!$A$1"}, {name: "Charlie", formula:"Sheet1!$C$1"})
 
+worksheet.add_merge_cells("B1:G1")
+
 currency = NumberFormat.new("\"$\"#,##0.00")
 
 heading = Font.new("Calibri", 14, {bold: true, italic: true, underline: true})
@@ -40,6 +42,7 @@ worksheet.column_widths(
   2 => 11.1640625,
   5 => 36.1640625
 )
+
 
 worksheet.add_rows(
   { number: 1,

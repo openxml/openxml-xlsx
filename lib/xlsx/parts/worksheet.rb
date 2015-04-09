@@ -1,13 +1,14 @@
 module Xlsx
   module Parts
     class Worksheet < OpenXml::Part
-      attr_reader :workbook, :index, :rows, :tables, :rels
+      attr_reader :workbook, :index, :rows, :tables, :rels, :merge_cells
 
       def initialize(workbook, index)
         @workbook = workbook
         @index = index
         @rows = []
         @tables = []
+        @merge_cells = []
         @rels = OpenXml::Parts::Rels.new
         @column_widths = {}
       end
@@ -26,7 +27,11 @@ module Xlsx
       def add_row(attributes)
         rows.push Xlsx::Elements::Row.new(self, attributes)
       end
-
+      
+      def add_merge_cells(*ranges)
+        ranges.each { |range| merge_cells.push range }
+      end
+      
       def add_table(id, name, ref, columns)
         table = Xlsx::Parts::Table.new(id, name, ref, columns)
         rels.add_relationship(REL_TABLE, "../tables/#{table.filename}")
@@ -48,6 +53,9 @@ module Xlsx
             xml.sheetData do
               rows.each { |row| row.to_xml(xml) }
             end
+            xml.mergeCells(count: merge_cells.size) do
+              merge_cells.each { |range| xml.mergeCell ref: range }
+            end if merge_cells.any?
             xml.pageMargins(left: 0.75, right: 0.75, top: 1, bottom: 1, header: 0.5, footer: 0.5)
             xml.pageSetup(orientation: "portrait", horizontalDpi: 4294967292, verticalDpi: 4294967292)
             xml.tableParts(count: tables.count) do
