@@ -10,7 +10,7 @@ include Xlsx::Elements
 
 workbook.add_defined_names({name: "Alpha", formula:"Sheet1!$A$1"}, {name: "Charlie", formula:"Sheet1!$C$1"})
 
-worksheet.add_merge_cells("B1:G1")
+worksheet.merge_cells("B1:G1", "A8:G8")
 
 currency = NumberFormat.new("\"$\"#,##0.00")
 
