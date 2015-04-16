@@ -63,8 +63,8 @@ module Xlsx
         value = serial_time if type == :time
         
         xml.c(attributes) do
-          xml.v value if value
           xml.f formula if formula
+          xml.v value if value
         end
       end
       
