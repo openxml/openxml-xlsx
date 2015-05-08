@@ -61,6 +61,7 @@ worksheet.add_rows(
       { column: 4, value: 65, style: {format: currency, alignment: right, border: border1} },
       { column: 5, value: "hi", style: {format: currency, fill: fill3, alignment: right} }] },
   { number: 4,
+    hidden: true,
     cells: [
       { column: 2, value: 2, style: {alignment: left, border: border2} },
       { column: 3, value: Date.new(2014, 7, 21), style: {format: NumberFormat::DAY_MONTH, alignment: center, border: border3} },
