@@ -10,6 +10,7 @@ module Xlsx
             xml.b if styles[:bold]
             xml.i if styles[:italic]
             xml.u if styles[:underline]
+            styles[:color].to_xml("color", xml) if styles[:color]
           end
         end
       end
