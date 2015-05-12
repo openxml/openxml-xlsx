@@ -14,7 +14,7 @@ worksheet.merge_cells("B1:G1", "A8:G8")
 
 currency = NumberFormat.new("\"$\"#,##0.00")
 
-heading = Font.new("Calibri", 14, {bold: true, italic: true, underline: true})
+heading = Font.new("Calibri", 25, {bold: true, italic: true, underline: true, color: IndexedColor.new(55)})
 
 fill2 = PatternFill.new("solid",
   ThemeColor.new(0, -4.9989318521683403E-2),
