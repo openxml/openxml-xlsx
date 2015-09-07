@@ -1,5 +1,9 @@
-.DS_Store
-*.gem
-.rspec-local
-/coverage
-
+/.bundle/
+/.yardoc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
