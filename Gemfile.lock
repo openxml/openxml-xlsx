@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    xlsx (0.1.0)
+    openxml-xlsx (0.1.1)
       nokogiri
       open_xml_package (= 0.1.0)
 
@@ -44,13 +44,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  openxml-xlsx!
   pry
   rake
   rr
   rspec
   simplecov
   timecop
-  xlsx!
 
 BUNDLED WITH
    1.10.6
