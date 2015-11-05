@@ -4,17 +4,17 @@ module Xlsx
       attr_reader :strings
 
       def initialize
-        @strings = []
+        @strings = Hash.new { |hash, key| hash[key] = hash.length }
       end
 
       def reference_of(string)
-        Xlsx.index!(strings, string)
+        strings[string]
       end
 
       def to_xml
         build_standalone_xml do |xml|
           xml.sst(xmlns: "http://schemas.openxmlformats.org/spreadsheetml/2006/main", uniqueCount: strings.length) do
-            strings.each do |string|
+            strings.each do |string, i|
               xml.si { xml.t(string) }
             end
           end
