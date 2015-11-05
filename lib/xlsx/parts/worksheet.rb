@@ -27,11 +27,11 @@ module Xlsx
       def add_row(attributes)
         rows.push Xlsx::Elements::Row.new(self, attributes)
       end
-      
+
       def merge_cells(*ranges)
         ranges.each { |range| cell_ranges.push range }
       end
-      
+
       def add_table(id, name, ref, columns)
         table = Xlsx::Parts::Table.new(id, name, ref, columns)
         rels.add_relationship(REL_TABLE, "../tables/#{table.filename}")

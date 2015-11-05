@@ -1,7 +1,7 @@
 module Xlsx
   module Elements
     class Font < Struct.new(:name, :size, :styles)
-      
+
       def to_xml(xml)
         xml.font do
           xml.sz val: size
@@ -14,7 +14,7 @@ module Xlsx
           end
         end
       end
-      
+
     end
   end
 end

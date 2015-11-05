@@ -1,7 +1,7 @@
 module Xlsx
   module Elements
     class PatternFill < Struct.new(:type, :foreground_color, :background_color)
-      
+
       def to_xml(xml)
         xml.fill do
           xml.patternFill(patternType: type) do
@@ -12,7 +12,7 @@ module Xlsx
           end
         end
       end
-      
+
     end
   end
 end

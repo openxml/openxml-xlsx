@@ -27,13 +27,13 @@ module Xlsx
         package.add_part "xl/tables/#{table.filename}", table
         tables.push table
       end
-      
+
       def add_defined_names(*defined_names)
         defined_names.flatten.each do |attributes|
           add_defined_name attributes
         end
       end
-      
+
       def add_defined_name(attributes)
         defined_names.push Xlsx::Elements::DefinedName.new(attributes[:name], attributes[:formula])
       end

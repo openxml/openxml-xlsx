@@ -1,7 +1,7 @@
 module Xlsx
   module Elements
     class BorderComponent < Struct.new(:style, :color)
-      
+
       def to_xml(name, xml)
         if style && color
           xml.public_send(name, style: style) do
@@ -13,7 +13,7 @@ module Xlsx
           xml.public_send(name)
         end
       end
-      
+
     end
   end
 end

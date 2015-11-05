@@ -23,14 +23,14 @@ module Xlsx
         options[:font_id] = Xlsx.index!(fonts, options[:font]) if options.key? :font
         options[:fill_id] = Xlsx.index!(fills, options[:fill]) if options.key? :fill
         options[:border_id] = Xlsx.index!(borders, options[:border]) if options.key? :border
-        
+
         style = Style.new(
           options.fetch(:format_id, 0),
           options.fetch(:font_id, 0),
           options.fetch(:fill_id, 0),
           options.fetch(:border_id, 0),
           options.fetch(:alignment, nil))
-        
+
         Xlsx.index!(styles, style)
       end
 

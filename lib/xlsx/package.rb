@@ -19,7 +19,7 @@ module Xlsx
     def initialize
       super
       rels.add_relationship REL_DOCUMENT, "xl/workbook.xml"
-      
+
       @xl_rels = OpenXml::Parts::Rels.new([
         { "Type" => REL_SHARED_STRINGS, "Target" => "sharedStrings.xml" },
         { "Type" => REL_STYLES, "Target" => "styles.xml" }
@@ -27,7 +27,7 @@ module Xlsx
       @shared_strings = Xlsx::Parts::SharedStrings.new
       @stylesheet = Xlsx::Parts::Stylesheet.new
       @workbook = Xlsx::Parts::Workbook.new(self)
-      
+
       # docProps/app.xml
       # docProps/core.xml
       add_part "xl/_rels/workbook.xml.rels", xl_rels
