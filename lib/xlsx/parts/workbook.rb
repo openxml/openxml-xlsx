@@ -41,6 +41,9 @@ module Xlsx
       def to_xml
         build_standalone_xml do |xml|
           xml.workbook(root_namespaces) {
+            xml.bookViews {
+              xml.workbookView
+            }
             xml.sheets { worksheets.each { |worksheet|
               xml.sheet(
                 "name" => worksheet.name,
