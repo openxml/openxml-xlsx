@@ -1,5 +1,7 @@
-module Xlsx
-  module Parts
+module OpenXml
+  module Xlsx
+    module Parts
+    end
   end
 end
 

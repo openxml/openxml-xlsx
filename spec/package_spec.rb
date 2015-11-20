@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Xlsx::Package do
+describe OpenXml::Xlsx::Package do
   attr_reader :package
 
   context "when starting a new package" do
@@ -13,7 +13,7 @@ describe Xlsx::Package do
     end
 
     it "should create the workbook part" do
-      expect(package.workbook).to be_instance_of(Xlsx::Parts::Workbook)
+      expect(package.workbook).to be_instance_of(OpenXml::Xlsx::Parts::Workbook)
     end
 
     it "should create the global rels part" do
@@ -25,11 +25,11 @@ describe Xlsx::Package do
     end
 
     it "should create the shared_strings part" do
-      expect(package.shared_strings).to be_instance_of(Xlsx::Parts::SharedStrings)
+      expect(package.shared_strings).to be_instance_of(OpenXml::Xlsx::Parts::SharedStrings)
     end
 
     it "should create the stylesheet part" do
-      expect(package.stylesheet).to be_instance_of(Xlsx::Parts::Stylesheet)
+      expect(package.stylesheet).to be_instance_of(OpenXml::Xlsx::Parts::Stylesheet)
     end
   end
 

@@ -1,12 +1,13 @@
 #!/usr/bin/env ruby
 
+require "rails" # workaround: openxml-package uses `extract_options!`
 $:.push Dir.pwd + "/lib"
-require "xlsx"
-package = Xlsx::Package.new
+require "openxml/xlsx"
+package = OpenXml::Xlsx::Package.new
 workbook = package.workbook
 worksheet = workbook.worksheets[0]
 
-include Xlsx::Elements
+include OpenXml::Xlsx::Elements
 
 workbook.add_defined_names({name: "Alpha", formula:"Sheet1!$A$1"}, {name: "Charlie", formula:"Sheet1!$C$1"})
 
