@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
-require "rails" # workaround: openxml-package uses `extract_options!`
 $:.push Dir.pwd + "/lib"
 require "openxml/xlsx"
+
 package = OpenXml::Xlsx::Package.new
 workbook = package.workbook
 worksheet = workbook.worksheets[0]
