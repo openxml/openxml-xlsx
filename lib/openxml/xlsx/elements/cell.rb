@@ -11,17 +11,18 @@ module OpenXml
           @column = options.fetch(:column)
           @value = options[:value]
           case value
-          when String
-            @type = :string
-            @string_id = package.string_ref(value)
-          when Date then
+          when Numeric
+            @type = :general
+          when Date
             @type = :date
             @serial_date = to_serial_date(value)
-          when Time then
+          when Time
             @type = :time
             @serial_time = to_serial_time(value)
           else
-            @type = :general
+            @value = value.to_s
+            @type = :string
+            @string_id = package.string_ref(value)
           end
           @style = package.style_ref(options[:style]) if options.key? :style
           @formula = options[:formula]
