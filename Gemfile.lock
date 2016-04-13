@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    openxml-xlsx (0.2.2)
+    openxml-xlsx (0.2.3)
       nokogiri
       openxml-package (>= 0.2.0)
 
