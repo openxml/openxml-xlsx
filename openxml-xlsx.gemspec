@@ -10,9 +10,9 @@ Gem::Specification.new do |spec|
   spec.email         = ["bob.lailfamily@gmail.com"]
 
   spec.description   = %q{Create Microsoft Excel (.xlsx) files.}
-  spec.summary       = %q{Using a simple API, create xlsx files programmatically}
-  spec.license       = "MIT"
+  spec.summary       = %q{Implements the Office Open XML spec for creating SpreadsheetML documents}
   spec.homepage      = "https://github.com/openxml/openxml-xlsx"
+  spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.required_ruby_version = "~> 2.0"
+
   spec.add_dependency "nokogiri"
   spec.add_dependency "openxml-package", ">= 0.2.0"
 
