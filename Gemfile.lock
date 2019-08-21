@@ -11,16 +11,16 @@ GEM
     coderay (1.1.0)
     diff-lcs (1.2.5)
     docile (1.1.5)
-    json (1.8.3)
+    json (1.8.6)
     method_source (0.8.2)
-    mini_portile2 (2.0.0)
-    nokogiri (1.6.7.2)
-      mini_portile2 (~> 2.0.0.rc2)
+    mini_portile2 (2.4.0)
+    nokogiri (1.10.4)
+      mini_portile2 (~> 2.4.0)
     openxml-package (0.2.3)
       nokogiri
       ox
       rubyzip (~> 1.1.0)
-    ox (2.3.0)
+    ox (2.11.0)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -62,4 +62,4 @@ DEPENDENCIES
   timecop
 
 BUNDLED WITH
-   1.11.2
+   1.17.2
