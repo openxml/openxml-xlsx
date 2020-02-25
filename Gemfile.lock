@@ -14,7 +14,7 @@ GEM
     json (1.8.6)
     method_source (0.8.2)
     mini_portile2 (2.4.0)
-    nokogiri (1.10.4)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     openxml-package (0.2.3)
       nokogiri
