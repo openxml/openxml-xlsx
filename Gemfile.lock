@@ -13,9 +13,9 @@ GEM
     docile (1.1.5)
     json (1.8.6)
     method_source (0.8.2)
-    mini_portile2 (2.6.1)
-    nokogiri (1.12.5)
-      mini_portile2 (~> 2.6.1)
+    mini_portile2 (2.8.0)
+    nokogiri (1.13.4)
+      mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     openxml-package (0.3.4)
       nokogiri
